@@ -1,0 +1,35 @@
+﻿<!doctype html>
+<title>Image Resize</title>
+<h2>Select a file to resize</h2>
+<p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</p>
+{% if filename %}
+<div>
+    <img src="{{ url_for('display_image', filename=filename) }}">
+</div>
+{% endif %}
+<form method="post" action="/images/resize" enctype="multipart/form-data">
+    <dl>
+        <p>
+            <input type="file" name="file" autocomplete="off" required>
+        </p>
+        <select name="Sizes">
+            <option value="118x118">118x118</option>
+            <option value="185x185">185x185</option>
+            <option value="380x380">380x380</option>
+            <option value="1200x1200">1200x1200</option>
+        </select>
+    </dl>
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+</form>
